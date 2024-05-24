@@ -1,0 +1,115 @@
+new 20
+lds
+push 32
+sto [SP]
+ldc readReturn
+sto [SP-8]
+jmp readMethod
+    new 4
+    ldc [HS+20]
+    sto [HS+12]
+    new 8
+    out [DS+0]
+    in
+    sto [HS+0]
+    lda [HS+0]
+    newa
+    ldc [HS+32]
+    sto [HS+16]
+    ldc 1
+    sto [SP-16]
+        lda [HS+0]
+        suba [SP-16]
+        bzj end1
+        eqj end1
+        out [DS+4]
+        out [SP-16]
+        out [DS+8]
+        in
+        sto [HS+24]
+        out [DS+4]
+        out [SP-16]
+        out [DS+12]
+        in
+        sto [HS+28]
+        lda [SP-16]
+        subc 1
+        mulc 8
+        adda [HS+16]
+        sto [SP-20]
+        lda [SP-16]
+        stoa [SP-24]
+        lda [SP-16]
+        addc 1
+        sto [SP-16]
+        jmp start1
+        jmp [SP-8]
+    pop 32
+    lds
+    push 24
+    sto [SP]
+    ldc calReturn
+    sto [SP-8]
+    jmp calMethod
+        ldc 0
+        sto [SP-12]
+        ldc 0
+        sto [SP-16]
+            lda [HS+0]
+            suba [SP-16]
+            bzj end2
+            lds
+            push 28
+            sto [SP-12]
+            ldc sumReturn
+            sto [SP-20]
+            lda [SP-44]
+            mulc 8
+            adda [HS+16]
+            sto [SP-48]
+            lda [SP-48]
+            sto [SP-4]
+            lda [SP-48]
+            addc 4
+            sto [SP-8]
+            jmp sumMethod
+                lda [SP-4]
+                adda [SP-8]
+                sto [SP-24]
+                lda [SP-24]
+                sto [SP-0]
+                jmp sumReturn
+                lda [SP-0]
+                adda [SP-40]
+                sto [SP-40]
+                pop 28
+                lda [SP-16]
+                addc 1
+                sto [SP-16]
+                jmp start2
+            lda [SP-12]
+            sto [HS+4]
+            lds
+            push 24
+            sto [SP-8]
+            ldc avgReturn
+            sto [SP-16]
+            lda [SP-36]
+            sto [SP-4]
+            jmp avgMethod
+                lda [SP-4]
+                diva [HS+0]
+                divc 2
+                sto [SP-20]
+                lda [SP-20]
+                sto [SP]
+                jmp avgReturn
+                lda [SP]
+                sto [HS+8]
+                pop 24
+                pop 24
+                out [DS+16]
+                out [HS+4]
+                out [DS+20]
+                out [HS+8]
+                halt

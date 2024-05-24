@@ -1,0 +1,172 @@
+.data
+STUDENT_NUMBER [DS+0] students_number:
+STUDENT [DS+4] student
+ENGLISH_SCORE [DS+8] 's_english_score:
+KOREAN_SCORE [DS+12] 's_korean_score:
+SUM [DS+16] sum:
+AVG [DS+20] avg:
+.code
+new 20
+// int num [HS+0]
+// int sumAll [HS+4]
+// int avgAll [HS+8]
+// Scanner scanner [HS+12]
+// Student[] students [HS+16]
+lds
+push 32
+sto [SP]
+ldc readReturn
+sto [SP-8]
+jmp readMethod
+// static link [sp]
+// dynamic link [sp-4]
+// returnAdd [sp-8]
+// student [sp-12]
+// i [sp-16]
+// students.pointer [sp-20]
+readMethod:
+    new 4
+    // scanner [HS+20]
+    ldc [HS+20]
+    sto [HS+12]
+    new 8
+    // int engScore [HS+24]
+    // int korScore [HS+28]
+    out [DS+0]
+    in
+    sto [HS+0]
+    lda [HS+0]
+    newa
+    // students [HS+32]
+    ldc [HS+32]
+    sto [HS+16]
+    ldc 1
+    sto [SP-16]
+    start1:
+        lda [HS+0]
+        suba [SP-16]
+        bzj end1
+        eqj end1
+        out [DS+4]
+        out [SP-16]
+        out [DS+8]
+        in
+        sto [HS+24]
+        out [DS+4]
+        out [SP-16]
+        out [DS+12]
+        in
+        sto [HS+28]
+        lda [SP-16]
+        subc 1
+        mulc 8
+        adda [HS+16]
+        sto [SP-20]
+        lda [SP-16]
+        stoa [SP-24]
+        lda [SP-16]
+        addc 1
+        sto [SP-16]
+        jmp start1
+    end1:
+        jmp [SP-8]
+readReturn:
+    pop 32
+    lds
+    push 24
+    sto [SP]
+    ldc calReturn
+    sto [SP-8]
+    jmp calMethod
+    // static link [sp]
+    // dynamic link [sp-4]
+    // returnAdd [sp-8]
+    // sum [sp-12]
+    // i [sp-16]
+    // students.pointer [sp-20]
+    // sum().push --> + 28
+    // avg().push --> + 24
+    calMethod:
+        ldc 0
+        sto [SP-12]
+        ldc 0
+        sto [SP-16]
+        start2:
+            lda [HS+0]
+            suba [SP-16]
+            bzj end2
+            lds
+            push 28
+            sto [SP-12]
+            ldc sumReturn
+            sto [SP-20]
+            lda [SP-44]
+            mulc 8
+            adda [HS+16]
+            sto [SP-48]
+            lda [SP-48]
+            sto [SP-4]
+            lda [SP-48]
+            addc 4
+            sto [SP-8]
+            jmp sumMethod
+            // return value [SP]
+            // students[i].engScore [SP - 4]
+            // students[i].korScore [SP - 8]
+            // static link [sp - 12]
+            // dynamic link [sp - 16]
+            // returnAdd [sp - 20]
+            // int sum [SP - 24]
+            sumMethod:
+                lda [SP-4]
+                adda [SP-8]
+                sto [SP-24]
+                lda [SP-24]
+                sto [SP-0]
+                jmp sumReturn
+            sumReturn:
+                lda [SP-0]
+                adda [SP-40]
+                sto [SP-40]
+                pop 28
+                lda [SP-16]
+                addc 1
+                sto [SP-16]
+                jmp start2
+        end2:
+            lda [SP-12]
+            sto [HS+4]
+            lds
+            push 24
+            sto [SP-8]
+            ldc avgReturn
+            sto [SP-16]
+            lda [SP-36]
+            sto [SP-4]
+            jmp avgMethod
+            // return value [SP]
+            // int sum [SP-4]
+            // static link [sp-8]
+            // dynamic link [sp-12]
+            // returnAdd [sp-16]
+            // int avg [SP-20]
+            avgMethod:
+                lda [SP-4]
+                diva [HS+0]
+                divc 2
+                sto [SP-20]
+                lda [SP-20]
+                sto [SP]
+                jmp avgReturn
+            avgReturn:
+                lda [SP]
+                sto [HS+8]
+                pop 24
+    calReturn:
+        pop 24
+        out [DS+16]
+        out [HS+4]
+        out [DS+20]
+        out [HS+8]
+        halt
+.end

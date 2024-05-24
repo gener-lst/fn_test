@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MCU/MCU.iml" filepath="$PROJECT_DIR$/MCU/MCU.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MCU(memory까지)/MCU(memory까지).iml" filepath="$PROJECT_DIR$/MCU(memory까지)/MCU(memory까지).iml" />
+      <module fileurl="file://$PROJECT_DIR$/compiler/compiler.iml" filepath="$PROJECT_DIR$/compiler/compiler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/studentScore/studentScore.iml" filepath="$PROJECT_DIR$/studentScore/studentScore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/시스템-중간/시스템-중간.iml" filepath="$PROJECT_DIR$/시스템-중간/시스템-중간.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/시프 기말.iml" filepath="$PROJECT_DIR$/.idea/시프 기말.iml" />
+    </modules>
+  </component>
+</project>

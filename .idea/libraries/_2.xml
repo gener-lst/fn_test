@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="시프 기말">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/MCU(memory까지).zip!/" />
+      <root url="jar://$PROJECT_DIR$/김민철_60170412_MCU+Compiler.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
